@@ -70,7 +70,7 @@
 
             <div class="cards__text">
 
-                <h3 class="card__title">Di un poema<span class="point">.</span></h3>
+                <h3 class="card__title">cuentame un poema<span class="point">.</span></h3>
                 <p class="card__copy">Relajate con Einyel</p>
 
             </div>
@@ -98,54 +98,36 @@
                 'hola Angela': function () {
                     utter.text = 'Hola Bienvenido';
                     //Setea la voz que queremos usar en base a nuestra lista.
-                    utter.voice = voices[2];
+                    utter.voice = voices[0];
                     window.speechSynthesis.speak(utter);
                 },
                 'Cual es tu proposito': function () {
                     utter.text = 'Mi proposito es hacer tu vida mas facil';
-                    utter.voice = voices[2];
+                    utter.voice = voices[0];
                     window.speechSynthesis.speak(utter);
                 },
-                'Eres muy buena': function () {
-                    utter.text = 'gracias, me esfuerzo para brindarte lo mejor';
-                    utter.voice = voices[2];
+                'eres muy buena': function () {
+                    utter.text = 'Gracias, me esfuerzo para darte lo mejor!';
+                    utter.voice = voices[0];
                     window.speechSynthesis.speak(utter);
-                    //Guarda el nombre que le decimos por voz.
-                    annyang.addCallback('result', function (phrases) {
-                        //Imprime el nombre por consola.
-                        console.log("Nombre: ", phrases[0]);
-                        //Para el evento result.
-                        annyang.removeCallback('result');
-                        //Nos dice hola + el nombre que le digamos por voz.
-                        utter.text = 'Hola, ' + phrases[0];
-                        window.speechSynthesis.speak(utter);
-                    });
                 },
+                
                 'Prende las luces': function () {
                     utter.text = 'Prendiendo luces';
-                    utter.voice = voices[2];
+                    utter.voice = voices[0];
                     window.speechSynthesis.speak(utter);
-                    //Guarda el nombre que le decimos por voz.
-                    annyang.addCallback('result', function (phrases) {
-                        //Imprime el nombre por consola.
-                        console.log("Nombre: ", phrases[0]);
-                        //Para el evento result.
-                        annyang.removeCallback('result');
-                        //Nos dice hola + el nombre que le digamos por voz.
-                        utter.text = 'Hola, ' + phrases[0];
-                        window.speechSynthesis.speak(utter);
-                    });
+                    
                 },
-                'di un poema': function () {
+                /*'Cuentame un poema': function () {
                     poema = ['Mis pasos estan en la calle resuenan, en la otra calle donde oigo mis pasos, pasar en esta calle, donde solo es real la niebla ',
                         'En las noches claras, resuelvo el problema de la soledad del ser. Invito a la luna y con mi sombra somos tres.',
                         'Mata su luz un fuego abandonado. Sube su canto un pájaro enamorado. Tantas criaturas ávidas en mi silencio y esta pequeña lluvia que me acompaña.',
                         'Cuando el mar sea redondoy el sol deje de brillar ese será el día, en que te pueda olvidar.'
                     ];
                     utter.text = chistes[Math.floor(Math.random() * poema.length)]
-                    utter.voice = voices[2];
+                    utter.voice = voices[0];
                     window.speechSynthesis.speak(utter);
-                },
+                },*/
                 //Array que devuelve aleatoriamente un elemento del array, en este caso un chiste.
                 'cuentame un chiste': function () {
                     chistes = ['Por qué las focas del circo miran siempre hacia arriba?   Porque es donde están los focos.',
@@ -154,7 +136,7 @@
                         'Buenos dias, me gustaria alquilar "Batman Forever".   No es posible, tiene que devolverla tomorrow.'
                     ];
                     utter.text = chistes[Math.floor(Math.random() * chistes.length)]
-                    utter.voice = voices[2];
+                    utter.voice = voices[0];
                     window.speechSynthesis.speak(utter);
                 }
             };
