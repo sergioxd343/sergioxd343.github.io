@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente virtual</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body background="gris.jpg">
+
+    
+
+
+    </div>
+    <h1 class="title">La mejor <span class="title--active">Einyel.</span></h1>
+    <a href="#" class="cta">Iniciar</a>
+    <br/>
+    <h2 class="title">Prueba con: </h2>
+    <article class="container-cards">
+        <div class="card">
+
+            <div class="cards__text">
+                <h3 class="card__title">Hola Angela<span class="point">.</span></h3>
+                <p class="card__copy">Einyel Te dara la bienvenida</p>
+
+            </div>
+        </div>
+        <div class="card">
+
+            <div class="cards__text">
+
+                <h3 class="card__title">Cual es tu proposito?<span class="point">.</span></h3>
+                <p class="card__copy">Einyel te respondera<p>
+
+            </div>
+        </div>
+        <div class="card">
+
+            <div class="cards__text">
+
+                <h3 class="card__title">Eres muy buena<span class="point">.</span></h3>
+                <p class="card__copy">halágala </p>
+
+            </div>
+        </div>
+    </article>
+    <article class="container-cards">
+        <div class="card">
+
+            <div class="cards__text">
+                <h3 class="card__title">Prende las luces<span class="point">.</span></h3>
+                <p class="card__copy">Realiza los trabajos que ordenes</p>
+
+            </div>
+        </div>
+        <div class="card">
+
+            <div class="cards__text">
+
+                <h3 class="card__title">Cuentame un chiste<span class="point">.</span></h3>
+                <p class="card__copy">Diviertete con ella<p>
+
+            </div>
+        </div>
+        <div class="card">
+
+            <div class="cards__text">
+
+                <h3 class="card__title">Di un poema<span class="point">.</span></h3>
+                <p class="card__copy">Relajate con Einyel</p>
+
+            </div>
+        </div>
+    </article>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+    <script>
+        if (annyang) {
+            console.log("Comando de voz funcionando :");
+
+            var voices;
+
+            var utter = new SpeechSynthesisUtterance();
+            utter.rate = 1;
+            utter.pitch = 0, 5;
+            utter.lang = 'es-MX';
+
+            window.speechSynthesis.onvoiceschanged = function () {
+                voices = window.speechSynthesis.getVoices();
+                console.log(voices);
+            }
+            var commands = {
+                'hola Angela': function () {
+                    utter.text = 'Hola Bienvenido';
+                    //Setea la voz que queremos usar en base a nuestra lista.
+                    utter.voice = voices[2];
+                    window.speechSynthesis.speak(utter);
+                },
+                'Cual es tu proposito': function () {
+                    utter.text = 'Mi proposito es hacer tu vida mas facil';
+                    utter.voice = voices[2];
+                    window.speechSynthesis.speak(utter);
+                },
+                'Eres muy buena': function () {
+                    utter.text = 'gracias, me esfuerzo para brindarte lo mejor';
+                    utter.voice = voices[2];
+                    window.speechSynthesis.speak(utter);
+                    //Guarda el nombre que le decimos por voz.
+                    annyang.addCallback('result', function (phrases) {
+                        //Imprime el nombre por consola.
+                        console.log("Nombre: ", phrases[0]);
+                        //Para el evento result.
+                        annyang.removeCallback('result');
+                        //Nos dice hola + el nombre que le digamos por voz.
+                        utter.text = 'Hola, ' + phrases[0];
+                        window.speechSynthesis.speak(utter);
+                    });
+                },
+                'Prende las luces': function () {
+                    utter.text = 'Prendiendo luces';
+                    utter.voice = voices[2];
+                    window.speechSynthesis.speak(utter);
+                    //Guarda el nombre que le decimos por voz.
+                    annyang.addCallback('result', function (phrases) {
+                        //Imprime el nombre por consola.
+                        console.log("Nombre: ", phrases[0]);
+                        //Para el evento result.
+                        annyang.removeCallback('result');
+                        //Nos dice hola + el nombre que le digamos por voz.
+                        utter.text = 'Hola, ' + phrases[0];
+                        window.speechSynthesis.speak(utter);
+                    });
+                },
+                'di un poema': function () {
+                    poema = ['Mis pasos estan en la calle resuenan, en la otra calle donde oigo mis pasos, pasar en esta calle, donde solo es real la niebla ',
+                        'En las noches claras, resuelvo el problema de la soledad del ser. Invito a la luna y con mi sombra somos tres.',
+                        'Mata su luz un fuego abandonado. Sube su canto un pájaro enamorado. Tantas criaturas ávidas en mi silencio y esta pequeña lluvia que me acompaña.',
+                        'Cuando el mar sea redondoy el sol deje de brillar ese será el día, en que te pueda olvidar.'
+                    ];
+                    utter.text = chistes[Math.floor(Math.random() * poema.length)]
+                    utter.voice = voices[2];
+                    window.speechSynthesis.speak(utter);
+                },
+                //Array que devuelve aleatoriamente un elemento del array, en este caso un chiste.
+                'cuentame un chiste': function () {
+                    chistes = ['Por qué las focas del circo miran siempre hacia arriba?   Porque es donde están los focos.',
+                        'Estas obsesionado con la comida!   No se a que te refieres croquetamente.',
+                        'Por que estás hablando con esas zapatillas?   Porque pone "converse"',
+                        'Buenos dias, me gustaria alquilar "Batman Forever".   No es posible, tiene que devolverla tomorrow.'
+                    ];
+                    utter.text = chistes[Math.floor(Math.random() * chistes.length)]
+                    utter.voice = voices[2];
+                    window.speechSynthesis.speak(utter);
+                }
+            };
+
+            //Esto nos sirve para ver que escucha el programa en tiempo real.
+
+            annyang.addCallback('result', function (phrases) {
+                console.log("I think the user said: ", phrases[0]);
+                console.log("But then again, it could be any of the following: ", phrases);
+            });
+
+
+
+
+            //add Comands
+            annyang.addCommands(commands);
+
+            //Star 
+            annyang.start({ autoRestart: false, continuous: true });
+
+
+        }
+
+    </script>
+</body>
+
+</html>
